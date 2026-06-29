@@ -5,7 +5,7 @@
 <div class="settings-box">
     <h2 class="mb-4">Pool Settings</h2>
 
-    <form method="POST" action="{{ route('setting') }}">
+    <form method="POST" action="{{ route('setting.store') }}">
         @csrf
 
         <label class="form-label">Pool Name</label>

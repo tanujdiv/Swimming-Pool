@@ -143,4 +143,54 @@ body {
             font-size: 18px;
         }
     }
+
+    /* availability */
+
+    .availability-box {
+        background: #fff;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+    }
+
+    @media (max-width:768px) {
+        .availability-box {
+            padding: 20px;
+        }
+    }
+
+    @media (max-width:576px) {
+        .availability-box {
+            padding: 15px;
+        }
+
+        .table {
+            font-size: 12px;
+        }
+    }
+
+    /* booking */
+
+    .booking-list-box {
+        background: #fff;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+    }
+
+    @media (max-width:768px) {
+        .booking-list-box {
+            padding: 20px;
+        }
+    }
+
+    @media (max-width:576px) {
+        .booking-list-box {
+            padding: 12px;
+        }
+
+        .table {
+            font-size: 12px;
+        }
+    }
 }

@@ -17,7 +17,7 @@
             <h3>Pool Admin</h3>
 
             <a href="#">Dashboard</a>
-            <a href="#">Bookings</a>
+            <a href="{{ route('admin.bookings') }}">Bookings</a>
             <a href="#">Customers</a>
             <a href="{{ route('setting') }}">Settings</a>
 

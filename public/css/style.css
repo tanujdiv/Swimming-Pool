@@ -191,7 +191,7 @@ body {
     }
 
 
-    
+
 
     /* AUTH PAGE */
     .auth-page {
@@ -234,6 +234,39 @@ body {
         }
 
         .auth-box h2 {
+            font-size: 24px;
+        }
+    }
+
+    /* booking page */
+
+    .booking-box {
+        background: #fff;
+        padding: 35px;
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, .08);
+        max-width: 700px;
+        margin: auto;
+    }
+
+    .booking-box label {
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+
+    @media (max-width:768px) {
+        .booking-box {
+            padding: 25px;
+        }
+    }
+
+    @media (max-width:576px) {
+        .booking-box {
+            padding: 15px;
+            border-radius: 15px;
+        }
+
+        .booking-box h2 {
             font-size: 24px;
         }
     }
