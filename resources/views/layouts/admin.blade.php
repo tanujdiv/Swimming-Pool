@@ -19,7 +19,7 @@
             <a href="#">Dashboard</a>
             <a href="#">Bookings</a>
             <a href="#">Customers</a>
-            <a href="#">Settings</a>
+            <a href="{{ route('setting') }}">Settings</a>
 
             <form action="/logout" method="POST">
                 @csrf

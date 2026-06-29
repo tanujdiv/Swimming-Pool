@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\SettingController;
 
 Route::get('/', function () {
     return view('frontend.home');
@@ -13,6 +14,9 @@ Route::middleware(['admin'])->group(function () {
         return view('admin.dashboard');
     });
 
+    Route::get('/admin/settings', [SettingController::class, 'index'])-> name("setting");
+
+    Route::post('/admin/settings', [SettingController::class, 'update']) ->name("setting");
 });
 
 Route::get('/register', [AuthController::class, 'registerPage']);
