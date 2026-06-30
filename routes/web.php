@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Admin\AvailabilityController;
 use App\Http\Controllers\Admin\BookingManagementController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\MembershipController;
 use App\Http\Controllers\Admin\NotificationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -42,6 +44,18 @@ Route::middleware(['admin'])->group(function () {
 
     Route::get('/admin/notifications', [NotificationController::class, 'index'])
         ->name('admin.notifications');
+
+    Route::get('/admin/memberships', [MembershipController::class, 'index'])
+        ->name('admin.memberships');
+
+    Route::post('/admin/memberships', [MembershipController::class, 'store'])
+        ->name('admin.memberships.store');
+
+    Route::get('/admin/coupons', [CouponController::class, 'index'])
+        ->name('admin.coupons');
+
+    Route::post('/admin/coupons', [CouponController::class, 'store'])
+        ->name('admin.coupons.store');
 });
 
 Route::get('/register', [AuthController::class, 'registerPage']);

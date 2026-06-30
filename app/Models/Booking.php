@@ -16,10 +16,12 @@ class Booking extends Model
         'booking_date',
         'start_time',
         'end_time',
+        'start_at',
+        'end_at',
         'duration_hours',
         'total_price',
         'full_pool',
-        'status'
+        'status',
     ];
 
     public function scopeActive($query)

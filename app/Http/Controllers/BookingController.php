@@ -6,6 +6,7 @@ use App\Models\Booking;
 use App\Models\PoolInfo;
 use App\Models\Setting;
 use App\Models\Availability;
+use App\Models\Coupon;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -70,13 +71,11 @@ class BookingController extends Controller
         $availability = Availability::where('date', $bookingDate)->first();
 
         if ($availability) {
-
             if ($availability->is_closed) {
                 return back()->with('error', 'Pool closed on selected date');
             }
 
             if ($availability->open_time && $availability->close_time) {
-
                 $open = Carbon::parse(
                     $bookingDate . ' ' . $availability->open_time
                 );
@@ -125,6 +124,29 @@ class BookingController extends Controller
 
         /*
         |--------------------------------------------------------------------------
+        | Coupon Apply
+        |--------------------------------------------------------------------------
+        */
+        if ($request->coupon_code) {
+            $coupon = Coupon::where('code', $request->coupon_code)
+                ->where('is_active', true)
+                ->first();
+
+            if ($coupon) {
+                if ($coupon->discount_type == 'fixed') {
+                    $price -= $coupon->discount_value;
+                } elseif ($coupon->discount_type == 'percent') {
+                    $price -= ($price * $coupon->discount_value) / 100;
+                }
+
+                if ($price < 0) {
+                    $price = 0;
+                }
+            }
+        }
+
+        /*
+        |--------------------------------------------------------------------------
         | Save Booking
         |--------------------------------------------------------------------------
         */
@@ -135,14 +157,11 @@ class BookingController extends Controller
             'adults' => $request->adults,
             'children' => $children,
             'total_people' => $totalPeople,
-
             'booking_date' => $bookingDate,
             'start_time' => $start->format('H:i:s'),
             'end_time' => $end->format('H:i:s'),
-
             'start_at' => $startAt,
             'end_at' => $endAt,
-
             'duration_hours' => $request->duration_hours,
             'total_price' => $price,
             'full_pool' => false,

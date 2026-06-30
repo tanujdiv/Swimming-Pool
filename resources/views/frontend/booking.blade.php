@@ -44,6 +44,9 @@
                     <option value="4">4 Hour</option>
                 </select>
 
+                <label>Coupon Code</label>
+                <input name="coupon_code" class="form-control mb-3">
+
                 <button class="btn btn-primary w-100">Book Now</button>
             </form>
 

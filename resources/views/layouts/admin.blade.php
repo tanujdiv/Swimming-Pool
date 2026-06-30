@@ -27,7 +27,15 @@
                 </li>
 
                 <li>
+                    <a href="{{ route('admin.memberships') }}">Memberships</a>
+                </li>
+
+                <li>
                     <a href="{{ route('admin.availability') }}">Availability</a>
+                </li>
+
+                <li>
+                    <a href="{{ route('admin.coupons') }}">Coupons</a>
                 </li>
 
                 <li>

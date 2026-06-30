@@ -13,6 +13,7 @@
                     <th>Time</th>
                     <th>People</th>
                     <th>Status</th>
+                    <th>Total Price</th>
                     <th>Actions</th>
                 </tr>
 
@@ -23,6 +24,7 @@
                         <td>{{ $booking->start_time }} - {{ $booking->end_time }}</td>
                         <td>{{ $booking->total_people }}</td>
                         <td>{{ $booking->status }}</td>
+                        <td>{{ $booking->total_price }}</td>
                         <td>
                             <form method="POST" action="{{ route('admin.booking.checkin', $booking->id) }}" class="mb-1">
                                 @csrf
