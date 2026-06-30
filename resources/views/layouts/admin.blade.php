@@ -13,6 +13,7 @@
 
     <div class="admin-wrapper">
 
+        <!-- Sidebar -->
         <div class="sidebar">
             <h3>Pool Admin</h3>
 
@@ -30,6 +31,10 @@
                 </li>
 
                 <li>
+                    <a href="{{ route('admin.notifications') }}">Notifications</a>
+                </li>
+
+                <li>
                     <a href="{{ route('setting') }}">Settings</a>
                 </li>
             </ul>
@@ -40,7 +45,19 @@
             </form>
         </div>
 
+        <!-- Main Content -->
         <div class="main-content">
+
+            <!-- Top Header -->
+            <div class="admin-topbar">
+                <h4>Admin Dashboard</h4>
+
+                <a href="{{ route('admin.notifications') }}" class="notification-bell">
+                    🔔
+                    <span class="notification-count">0</span>
+                </a>
+            </div>
+
             @yield('content')
         </div>
 

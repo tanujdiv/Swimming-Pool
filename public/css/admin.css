@@ -14,6 +14,17 @@ body {
     min-height: 100vh;
 }
 
+.admin-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    padding: 20px 30px;
+    border-radius: 18px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .08);
+}
+
 .sidebar {
     width: 260px;
     background: linear-gradient(180deg, #0077b6, #023e8a);
@@ -247,6 +258,73 @@ body {
         }
     }
 
+    /* Notification */
+
+    .admin-topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #fff;
+        padding: 20px 30px;
+        border-radius: 18px;
+        margin-bottom: 25px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, .08);
+    }
+
+    .notification-bell {
+        position: relative;
+        text-decoration: none;
+        font-size: 28px;
+    }
+
+    .notification-count {
+        position: absolute;
+        top: -8px;
+        right: -10px;
+        background: red;
+        color: #fff;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+    }
+
+    @media (max-width:768px) {
+        .admin-topbar {
+            padding: 15px 20px;
+        }
+
+        .admin-topbar h4 {
+            font-size: 18px;
+        }
+
+        .notification-bell {
+            font-size: 22px;
+        }
+    }
+
+    @media (max-width:576px) {
+        .admin-topbar {
+            padding: 12px;
+        }
+
+        .admin-topbar h4 {
+            font-size: 15px;
+        }
+
+        .notification-bell {
+            font-size: 18px;
+        }
+
+        .notification-count {
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+        }
+    }
 
 
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AvailabilityController;
 use App\Http\Controllers\Admin\BookingManagementController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\NotificationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\SettingController;
@@ -13,9 +14,9 @@ Route::get('/', function () {
 });
 
 Route::middleware(['admin'])->group(function () {
-    
-Route::get('/admin/dashboard', [DashboardController::class, 'index'])
-    ->name('admin.dashboard');
+
+    Route::get('/admin/dashboard', [DashboardController::class, 'index'])
+        ->name('admin.dashboard');
 
     Route::get('/admin/settings', [SettingController::class, 'index'])->name("setting");
 
@@ -38,6 +39,9 @@ Route::get('/admin/dashboard', [DashboardController::class, 'index'])
 
     Route::post('/booking/{booking}/extend', [BookingManagementController::class, 'extend'])
         ->name('admin.booking.extend');
+
+    Route::get('/admin/notifications', [NotificationController::class, 'index'])
+        ->name('admin.notifications');
 });
 
 Route::get('/register', [AuthController::class, 'registerPage']);
