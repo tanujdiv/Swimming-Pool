@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AvailabilityController;
 use App\Http\Controllers\Admin\BookingManagementController;
+use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\SettingController;
@@ -12,10 +13,9 @@ Route::get('/', function () {
 });
 
 Route::middleware(['admin'])->group(function () {
-
-    Route::get('/admin', function () {
-        return view('admin.dashboard');
-    });
+    
+Route::get('/admin/dashboard', [DashboardController::class, 'index'])
+    ->name('admin.dashboard');
 
     Route::get('/admin/settings', [SettingController::class, 'index'])->name("setting");
 
@@ -27,8 +27,17 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/admin/availability/store', [AvailabilityController::class, 'store'])
         ->name('admin.availability.store');
 
-    Route::get('/admin/bookings', [BookingManagementController::class, 'index'])
+    Route::get('/bookings', [BookingManagementController::class, 'index'])
         ->name('admin.bookings');
+
+    Route::post('/booking/{booking}/checkin', [BookingManagementController::class, 'checkIn'])
+        ->name('admin.booking.checkin');
+
+    Route::post('/booking/{booking}/checkout', [BookingManagementController::class, 'checkOut'])
+        ->name('admin.booking.checkout');
+
+    Route::post('/booking/{booking}/extend', [BookingManagementController::class, 'extend'])
+        ->name('admin.booking.extend');
 });
 
 Route::get('/register', [AuthController::class, 'registerPage']);

@@ -16,10 +16,23 @@
         <div class="sidebar">
             <h3>Pool Admin</h3>
 
-            <a href="#">Dashboard</a>
-            <a href="{{ route('admin.bookings') }}">Bookings</a>
-            <a href="#">Customers</a>
-            <a href="{{ route('setting') }}">Settings</a>
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="{{ route('admin.dashboard') }}">Dashboard</a>
+                </li>
+
+                <li>
+                    <a href="{{ route('admin.bookings') }}">Bookings</a>
+                </li>
+
+                <li>
+                    <a href="{{ route('admin.availability') }}">Availability</a>
+                </li>
+
+                <li>
+                    <a href="{{ route('setting') }}">Settings</a>
+                </li>
+            </ul>
 
             <form action="/logout" method="POST">
                 @csrf

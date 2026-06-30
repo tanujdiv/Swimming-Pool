@@ -2,38 +2,32 @@
 
 @section('content')
 
-<h1 class="mb-4">Dashboard</h1>
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <div class="stat-card">
+                <h4>Capacity</h4>
+                <h2>{{ $pool->capacity ?? 0 }}</h2>
+            </div>
+        </div>
 
-<div class="row g-4">
+        <div class="col-md-4 mb-3">
+            <div class="stat-card">
+                <h4>Occupied</h4>
+                <h2>{{ $currentOccupancy }}</h2>
+            </div>
+        </div>
 
-    <div class="col-lg-3 col-md-6">
-        <div class="stat-card">
-            <h3>50</h3>
-            <p>Total Capacity</p>
+        <div class="col-md-4 mb-3">
+            <div class="stat-card">
+                <h4>Revenue</h4>
+                <h2>₹{{ $revenue }}</h2>
+            </div>
         </div>
     </div>
 
-    <div class="col-lg-3 col-md-6">
-        <div class="stat-card">
-            <h3>23</h3>
-            <p>Occupied</p>
-        </div>
+    <div class="stat-card mt-3">
+        <h4>Active Bookings</h4>
+        <h2>{{ $activeBookings }}</h2>
     </div>
-
-    <div class="col-lg-3 col-md-6">
-        <div class="stat-card">
-            <h3>₹18,000</h3>
-            <p>Revenue</p>
-        </div>
-    </div>
-
-    <div class="col-lg-3 col-md-6">
-        <div class="stat-card">
-            <h3>12</h3>
-            <p>Bookings</p>
-        </div>
-    </div>
-
-</div>
 
 @endsection
