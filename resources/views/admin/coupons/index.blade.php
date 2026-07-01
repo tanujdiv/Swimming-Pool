@@ -42,6 +42,8 @@
                     <th>Type</th>
                     <th>Value</th>
                     <th>Expiry</th>
+                    <th>Status</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -51,6 +53,34 @@
                         <td>{{ $coupon->discount_type }}</td>
                         <td>{{ $coupon->discount_value }}</td>
                         <td>{{ $coupon->expires_at }}</td>
+
+                        <td>
+                            @if($coupon->is_active)
+                                <span class="badge bg-success">Active</span>
+                            @else
+                                <span class="badge bg-danger">Inactive</span>
+                            @endif
+                        </td>
+
+                        <td class="d-flex gap-2">
+
+                            <form method="POST" action="{{ route('admin.coupons.toggle', $coupon->id) }}">
+                                @csrf
+                                @method('PATCH')
+                                <button class="btn btn-warning btn-sm">
+                                    Toggle
+                                </button>
+                            </form>
+
+                            <form method="POST" action="{{ route('admin.coupons.destroy', $coupon->id) }}">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger btn-sm">
+                                    Delete
+                                </button>
+                            </form>
+
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

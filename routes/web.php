@@ -56,6 +56,15 @@ Route::middleware(['admin'])->group(function () {
 
     Route::post('/admin/coupons', [CouponController::class, 'store'])
         ->name('admin.coupons.store');
+
+    Route::put('/admin/coupons/{coupon}', [CouponController::class, 'update'])
+        ->name('admin.coupons.update');
+
+    Route::delete('/admin/coupons/{coupon}', [CouponController::class, 'destroy'])
+        ->name('admin.coupons.destroy');
+
+    Route::patch('/admin/coupons/{coupon}/toggle', [CouponController::class, 'toggle'])
+        ->name('admin.coupons.toggle');
 });
 
 Route::get('/register', [AuthController::class, 'registerPage']);

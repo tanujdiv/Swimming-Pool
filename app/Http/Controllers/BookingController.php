@@ -128,20 +128,27 @@ class BookingController extends Controller
         |--------------------------------------------------------------------------
         */
         if ($request->coupon_code) {
+
             $coupon = Coupon::where('code', $request->coupon_code)
                 ->where('is_active', true)
+                ->where(function ($q) {
+                    $q->whereNull('expires_at')
+                        ->orWhere('expires_at', '>=', now()->toDateString());
+                })
                 ->first();
 
-            if ($coupon) {
-                if ($coupon->discount_type == 'fixed') {
-                    $price -= $coupon->discount_value;
-                } elseif ($coupon->discount_type == 'percent') {
-                    $price -= ($price * $coupon->discount_value) / 100;
-                }
+            if (!$coupon) {
+                return back()->with('error', 'Invalid or expired coupon');
+            }
 
-                if ($price < 0) {
-                    $price = 0;
-                }
+            if ($coupon->discount_type == 'fixed') {
+                $price -= $coupon->discount_value;
+            } else {
+                $price -= ($price * $coupon->discount_value) / 100;
+            }
+
+            if ($price < 0) {
+                $price = 0;
             }
         }
 

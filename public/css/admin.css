@@ -112,6 +112,11 @@ body {
     font-size: 34px;
 }
 
+.badge {
+    padding: 8px 12px;
+    font-size: 12px;
+}
+
 .settings-box textarea {
     min-height: 120px;
 }
@@ -158,6 +163,11 @@ body {
 
     .main-content {
         padding: 15px;
+    }
+
+    .btn-sm {
+        font-size: 11px;
+        padding: 5px 8px;
     }
 
     .stat-card,
