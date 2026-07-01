@@ -14,6 +14,7 @@
                         <th>Price</th>
                         <th>End Date</th>
                         <th>Status</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
 
@@ -24,7 +25,24 @@
                             <td>{{ $purchase->membership->name }}</td>
                             <td>{{ $purchase->price }}</td>
                             <td>{{ $purchase->end_date }}</td>
-                            <td>{{ $purchase->status }}</td>
+                            <td>
+                                @if($purchase->status == 'active')
+                                    <span class="badge bg-success">Active</span>
+                                @else
+                                    <span class="badge bg-danger">Expired</span>
+                                @endif
+                            </td>
+
+                            <td>
+                                @if($purchase->status == 'expired')
+                                    <form method="POST" action="{{ route('membership.renew', $purchase) }}">
+                                        @csrf
+                                        <button class="btn btn-primary btn-sm">
+                                            Renew
+                                        </button>
+                                    </form>
+                                @endif
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

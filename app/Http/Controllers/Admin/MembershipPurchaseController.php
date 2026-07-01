@@ -9,6 +9,12 @@ class MembershipPurchaseController extends Controller
 {
     public function index()
     {
+        MembershipPurchase::where('end_date', '<', now()->toDateString())
+            ->where('status', 'active')
+            ->update([
+                'status' => 'expired'
+            ]);
+
         $purchases = MembershipPurchase::with('membership')
             ->latest()
             ->get();

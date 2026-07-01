@@ -71,6 +71,11 @@ Route::middleware(['admin'])->group(function () {
         '/admin/membership-purchases',
         [MembershipPurchaseController::class, 'index']
     )->name('admin.membership.purchases');
+
+    Route::post(
+        '/membership/{purchase}/renew',
+        [BookingController::class, 'renewMembership']
+    )->name('membership.renew');
 });
 
 Route::get('/register', [AuthController::class, 'registerPage']);
@@ -90,3 +95,5 @@ Route::post('/booking/store', [BookingController::class, 'store'])->name('bookin
 Route::get('/memberships', [BookingController::class, 'memberships'])->name('memberships');
 
 Route::post('/buy-membership', [BookingController::class, 'buyMembership'])->name('membership.buy');
+
+Route::view('/renew-membership', 'frontend.renew-membership')->name('membership.renew.page');

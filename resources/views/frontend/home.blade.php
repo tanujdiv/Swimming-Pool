@@ -16,7 +16,17 @@
                     <li class="nav-item"><a class="nav-link" href="#">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('booking') }}">Booking</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('memberships') }}">Membership</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('membership.renew.page') }}">Renew
+                            Membership</a></li>
+
+
                 </ul>
+
+                <form action="/logout" method="POST">
+                    @csrf
+                    <button class="logout-btn">Logout</button>
+                </form>
             </div>
         </div>
     </nav>

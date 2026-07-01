@@ -212,4 +212,18 @@ class BookingController extends Controller
 
         return back()->with('success', 'Membership Purchased');
     }
+
+    public function renewMembership(MembershipPurchase $purchase)
+    {
+        $days = $purchase->membership->days;
+
+        $purchase->end_date = now()
+            ->addDays($days)
+            ->toDateString();
+
+        $purchase->status = 'active';
+        $purchase->save();
+
+        return back()->with('success', 'Membership Renewed');
+    }
 }
