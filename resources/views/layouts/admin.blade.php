@@ -31,6 +31,11 @@
                 </li>
 
                 <li>
+                    <a href="{{ route('admin.membership.purchases') }}">
+                        Membership Purchases
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('admin.availability') }}">Availability</a>
                 </li>
 

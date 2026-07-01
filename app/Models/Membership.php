@@ -11,4 +11,10 @@ class Membership extends Model
         'price',
         'days',
     ];
+
+
+    public function purchases()
+    {
+        return $this->hasMany(MembershipPurchase::class);
+    }
 }

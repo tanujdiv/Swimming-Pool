@@ -217,12 +217,23 @@ body {
         color: #0077b6;
     }
 
+    .membership-card {
+        background: white;
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+    }
+
     /* Tablet */
     @media (max-width:768px) {
         .auth-box {
             width: 100%;
             max-width: 500px;
             padding: 30px;
+        }
+
+        .membership-card {
+            padding: 20px;
         }
     }
 
@@ -235,6 +246,18 @@ body {
 
         .auth-box h2 {
             font-size: 24px;
+        }
+
+        .membership-card {
+            padding: 15px;
+        }
+
+        .membership-card h3 {
+            font-size: 22px;
+        }
+
+        .membership-card h4 {
+            font-size: 18px;
         }
     }
 

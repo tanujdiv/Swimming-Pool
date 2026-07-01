@@ -9,6 +9,8 @@ use App\Models\Availability;
 use App\Models\Coupon;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Models\Membership;
+use App\Models\MembershipPurchase;
 
 class BookingController extends Controller
 {
@@ -176,5 +178,38 @@ class BookingController extends Controller
         ]);
 
         return back()->with('success', 'Booking Successful');
+    }
+
+    public function memberships()
+    {
+        $plans = Membership::latest()->get();
+        return view('frontend.memberships', compact('plans'));
+    }
+
+    public function buyMembership(Request $request)
+    {
+        $request->validate([
+            'customer_name' => 'required',
+            'phone' => 'required',
+            'membership_id' => 'required'
+        ]);
+
+        $membership = Membership::findOrFail($request->membership_id);
+
+        $start = now()->toDateString();
+        $end = now()->addDays($membership->days)->toDateString();
+
+        MembershipPurchase::create([
+            'customer_name' => $request->customer_name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'membership_id' => $membership->id,
+            'price' => $membership->price,
+            'start_date' => $start,
+            'end_date' => $end,
+            'status' => 'active'
+        ]);
+
+        return back()->with('success', 'Membership Purchased');
     }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BookingManagementController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MembershipController;
+use App\Http\Controllers\Admin\MembershipPurchaseController;
 use App\Http\Controllers\Admin\NotificationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -65,6 +66,11 @@ Route::middleware(['admin'])->group(function () {
 
     Route::post('/admin/coupons/{coupon}/toggle', [CouponController::class, 'toggle'])
         ->name('admin.coupons.toggle');
+
+    Route::get(
+        '/admin/membership-purchases',
+        [MembershipPurchaseController::class, 'index']
+    )->name('admin.membership.purchases');
 });
 
 Route::get('/register', [AuthController::class, 'registerPage']);
@@ -78,4 +84,9 @@ Route::post('/logout', [AuthController::class, 'logout']);
 
 
 Route::get('/booking', [BookingController::class, 'index'])->name('booking');
+
 Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
+
+Route::get('/memberships', [BookingController::class, 'memberships'])->name('memberships');
+
+Route::post('/buy-membership', [BookingController::class, 'buyMembership'])->name('membership.buy');
