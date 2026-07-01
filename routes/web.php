@@ -61,9 +61,9 @@ Route::middleware(['admin'])->group(function () {
         ->name('admin.coupons.update');
 
     Route::delete('/admin/coupons/{coupon}', [CouponController::class, 'destroy'])
-        ->name('admin.coupons.destroy');
+        ->name('admin.coupons.delete');
 
-    Route::patch('/admin/coupons/{coupon}/toggle', [CouponController::class, 'toggle'])
+    Route::post('/admin/coupons/{coupon}/toggle', [CouponController::class, 'toggle'])
         ->name('admin.coupons.toggle');
 });
 

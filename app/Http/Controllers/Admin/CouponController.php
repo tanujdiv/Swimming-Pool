@@ -34,9 +34,9 @@ class CouponController extends Controller
     {
         $data = $request->validate([
             'code' => 'required|unique:coupons,code,' . $coupon->id,
-            'discount_type' => 'required|in:fixed,percent',
+            'discount_type' => 'required',
             'discount_value' => 'required|numeric|min:1',
-            'expires_at' => 'nullable|date',
+            'expires_at' => 'nullable|date'
         ]);
 
         $coupon->update($data);

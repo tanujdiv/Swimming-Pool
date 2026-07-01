@@ -62,17 +62,16 @@
                             @endif
                         </td>
 
-                        <td class="d-flex gap-2">
+                        <td class="d-flex gap-2 flex-wrap">
 
-                            <form method="POST" action="{{ route('admin.coupons.toggle', $coupon->id) }}">
+                            <form method="POST" action="{{ route('admin.coupons.toggle', $coupon) }}">
                                 @csrf
-                                @method('PATCH')
                                 <button class="btn btn-warning btn-sm">
                                     Toggle
                                 </button>
                             </form>
 
-                            <form method="POST" action="{{ route('admin.coupons.destroy', $coupon->id) }}">
+                            <form method="POST" action="{{ route('admin.coupons.delete', $coupon) }}">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-danger btn-sm">
