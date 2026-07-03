@@ -10,6 +10,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use App\Models\MembershipPurchase;
+
+
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
@@ -41,4 +44,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+  public function membershipPurchases()
+{
+    return $this->hasMany(MembershipPurchase::class);
+}
 }

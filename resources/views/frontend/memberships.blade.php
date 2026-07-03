@@ -4,7 +4,13 @@
 
     <div class="container py-5">
 
-        <h2 class="mb-4">Membership Plans</h2>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Membership Plans</h2>
+
+            <a href="{{ route('membership.history') }}" class="btn btn-outline-primary">
+                View History
+            </a>
+        </div>
 
         @if(session('success'))
             <div class="alert alert-success">

@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\Membership;
 use App\Models\MembershipPurchase;
+use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
 {
@@ -188,10 +189,16 @@ class BookingController extends Controller
 
     public function buyMembership(Request $request)
     {
+        if (!Auth::check()) {
+            return redirect('/login')
+                ->with('error', 'Please login first to buy membership');
+        }
+
         $request->validate([
-            'customer_name' => 'required',
-            'phone' => 'required',
-            'membership_id' => 'required'
+            'customer_name' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'email' => 'nullable|email|max:255',
+            'membership_id' => 'required|exists:memberships,id'
         ]);
 
         $membership = Membership::findOrFail($request->membership_id);
@@ -200,6 +207,7 @@ class BookingController extends Controller
         $end = now()->addDays($membership->days)->toDateString();
 
         MembershipPurchase::create([
+            'user_id' => Auth::id(),
             'customer_name' => $request->customer_name,
             'phone' => $request->phone,
             'email' => $request->email,
@@ -207,14 +215,21 @@ class BookingController extends Controller
             'price' => $membership->price,
             'start_date' => $start,
             'end_date' => $end,
-            'status' => 'active'
+            'status' => 'active',
         ]);
 
-        return back()->with('success', 'Membership Purchased');
+        return back()->with('success', 'Membership Purchased Successfully');
     }
-
     public function renewMembership(MembershipPurchase $purchase)
     {
+        if (!Auth::check()) {
+            return redirect('/login');
+        }
+
+        if ($purchase->user_id != Auth::id()) {
+            abort(403);
+        }
+
         $days = $purchase->membership->days;
 
         $purchase->end_date = now()
@@ -224,6 +239,6 @@ class BookingController extends Controller
         $purchase->status = 'active';
         $purchase->save();
 
-        return back()->with('success', 'Membership Renewed');
+        return back()->with('success', 'Membership Renewed Successfully');
     }
 }
