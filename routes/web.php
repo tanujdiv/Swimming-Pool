@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MembershipController;
 use App\Http\Controllers\Admin\MembershipPurchaseController;
 use App\Http\Controllers\Admin\NotificationController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\SettingController;
@@ -102,4 +103,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/membership/history', [MembershipPurchaseController::class, 'history'])
         ->name('membership.history');
+
+    Route::post(
+        '/payment/create-order',
+        [PaymentController::class, 'createOrder']
+    )->name('payment.create');
 });

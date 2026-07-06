@@ -59,10 +59,15 @@
                 <label>Coupon Code</label>
                 <input name="coupon_code" class="form-control mb-3">
 
-                <button class="btn btn-primary w-100">Book Now</button>
+                <button type="button" id="payButton" class="btn btn-primary w-100">
+                    Pay & Book
+                </button>
             </form>
 
         </div>
     </div>
+
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 @endsection
