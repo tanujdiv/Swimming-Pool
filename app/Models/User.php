@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Payment;
 
 use App\Models\MembershipPurchase;
 
@@ -45,8 +46,13 @@ class User extends Authenticatable
         ];
     }
 
-  public function membershipPurchases()
-{
-    return $this->hasMany(MembershipPurchase::class);
-}
+    public function membershipPurchases()
+    {
+        return $this->hasMany(MembershipPurchase::class);
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
 }

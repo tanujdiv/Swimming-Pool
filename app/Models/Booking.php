@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Payment;
 
 class Booking extends Model
 {
@@ -27,5 +28,10 @@ class Booking extends Model
     public function scopeActive($query)
     {
         return $query->whereNotIn('status', ['cancelled', 'completed']);
+    }
+
+    public function payment()
+    {
+        return $this->hasOne(Payment::class);
     }
 }
