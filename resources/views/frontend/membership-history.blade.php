@@ -12,6 +12,7 @@
                         <th>Start</th>
                         <th>Expiry</th>
                         <th>Status</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
 
@@ -19,13 +20,31 @@
                     @forelse($purchases as $purchase)
                         <tr>
                             <td>{{ $purchase->membership->name ?? 'N/A' }}</td>
-                            <td>{{ $purchase->start_date }}</td>
-                            <td>{{ $purchase->end_date }}</td>
+                            <td>{{ \Carbon\Carbon::parse($purchase->start_date)->format('d M Y') }}</td>
+                            <td>{{ \Carbon\Carbon::parse($purchase->end_date)->format('d M Y') }}</td>
                             <td>
-                                @if($purchase->status == 'active')
-                                    <span class="badge bg-success">Active</span>
-                                @else
+                                @php
+                                    $daysLeft = now()->diffInDays($purchase->end_date, false);
+                                @endphp
+
+                                @if($purchase->status == 'expired')
                                     <span class="badge bg-danger">Expired</span>
+                                @elseif($daysLeft <= 3)
+                                    <span class="badge bg-warning">Expiring Soon</span>
+                                @else
+                                    <span class="badge bg-success">Active</span>
+                                @endif
+                            </td>
+                            <td>
+                                @if($purchase->status == 'expired')
+                                    <form method="POST" action="{{ route('membership.renew', $purchase->id) }}">
+                                        @csrf
+                                        <button class="btn btn-warning btn-sm">
+                                            Renew
+                                        </button>
+                                    </form>
+                                @else
+                                    —
                                 @endif
                             </td>
                         </tr>

@@ -112,6 +112,18 @@ body {
     font-size: 34px;
 }
 
+.dash-card {
+    background: #fff;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+}
+
+.dash-card h2 {
+    margin-top: 15px;
+    font-size: 34px;
+}
+
 .badge {
     padding: 8px 12px;
     font-size: 12px;
@@ -196,6 +208,11 @@ body {
         font-size: 26px;
     }
 
+
+    .dash-card {
+        padding: 20px;
+    }
+
     .admin-topbar {
         padding: 15px 20px;
     }
@@ -230,6 +247,16 @@ body {
     .stat-card h2,
     .card h2 {
         font-size: 20px;
+    }
+
+
+    .dash-card {
+        padding: 15px;
+        border-radius: 15px;
+    }
+
+    .dash-card h2 {
+        font-size: 26px;
     }
 
     .form-label {

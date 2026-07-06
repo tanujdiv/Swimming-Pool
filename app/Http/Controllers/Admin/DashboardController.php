@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
+use App\Models\MembershipPurchase;
 use App\Models\PoolInfo;
 
 class DashboardController extends Controller
@@ -21,11 +22,26 @@ class DashboardController extends Controller
         $activeBookings = Booking::whereIn('status', ['pending', 'checked_in'])
             ->count();
 
+        $totalMemberships = MembershipPurchase::count();
+
+        $activeMemberships = MembershipPurchase::where(
+            'status',
+            'active'
+        )->count();
+
+        $expiredMemberships = MembershipPurchase::where(
+            'status',
+            'expired'
+        )->count();
+
         return view('admin.dashboard', compact(
             'pool',
             'currentOccupancy',
             'revenue',
-            'activeBookings'
+            'activeBookings',
+            'totalMemberships',
+            'activeMemberships',
+            'expiredMemberships',
         ));
     }
 }
