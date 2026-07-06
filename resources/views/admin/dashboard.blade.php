@@ -46,12 +46,36 @@
                 <h2>{{ $expiredMemberships }}</h2>
             </div>
         </div>
+
+
+        <div class="col-md-4 mb-3">
+            <div class="dash-card">
+                <h5>Pending Bookings</h5>
+                <h2>{{ $pendingBookings }}</h2>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="dash-card">
+                <h5>Completed Bookings</h5>
+
+                <h2>{{ $completedBookings }}</h2>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="dash-card">
+                <h5>Cancelled Bookings</h5>
+
+                <h2>{{ $cancelledBookings }}</h2>
+            </div>
+        </div>
     </div>
 
-    <div class="stat-card mt-3">
-        <h4>Active Bookings</h4>
-        <h2>{{ $activeBookings }}</h2>
+    <div class="stat-card mt-4">
+        <h4>Today's Bookings</h4>
+        <h2>{{ $todayBookings }}</h2>
     </div>
+
 
 
 @endsection
