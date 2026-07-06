@@ -42,10 +42,15 @@
                     </li>
                 </ul>
 
-                <form action="/logout" method="POST" class="ms-lg-3 mt-3 mt-lg-0">
-                    @csrf
-                    <button class="logout-btn">Logout</button>
-                </form>
+
+                @if (Auth::user())
+                    <form action="/logout" method="POST" class="ms-lg-3 mt-3 mt-lg-0">
+                        @csrf
+                        <button class="logout-btn">Logout</button>
+                    </form>
+                @endif
+
+
             </div>
         </div>
     </nav>

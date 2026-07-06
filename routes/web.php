@@ -73,30 +73,26 @@ Route::middleware(['admin'])->group(function () {
     )->name('admin.membership.purchases');
 });
 
+
 Route::get('/register', [AuthController::class, 'registerPage']);
 Route::post('/register', [AuthController::class, 'register']);
 
-Route::get('/login', [AuthController::class, 'loginPage']);
+Route::get('/login', [AuthController::class, 'loginPage'])->name("login");
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::post('/logout', [AuthController::class, 'logout']);
 
 
-
-Route::get('/booking', [BookingController::class, 'index'])->name('booking');
-
-Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
-
-Route::get('/memberships', [BookingController::class, 'memberships'])->name('memberships');
-
-
-Route::view('/renew-membership', 'frontend.renew-membership')->name('membership.renew.page');
-
-
-
-
-
 Route::middleware('auth')->group(function () {
+
+    Route::get('/memberships', [BookingController::class, 'memberships'])->name('memberships');
+
+
+    Route::view('/renew-membership', 'frontend.renew-membership')->name('membership.renew.page');
+
+    Route::get('/booking', [BookingController::class, 'index'])->name('booking');
+
+    Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
 
     Route::post('/buy-membership', [BookingController::class, 'buyMembership'])
         ->name('membership.buy');
