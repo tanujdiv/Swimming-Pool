@@ -59,7 +59,7 @@
                 <label>Coupon Code</label>
                 <input name="coupon_code" class="form-control mb-3">
 
-                <button type="button" id="payButton" class="btn btn-primary w-100">
+                <button type="submit" id="payButton" class="btn btn-primary w-100">
                     Pay & Book
                 </button>
             </form>

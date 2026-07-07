@@ -4,6 +4,28 @@
     box-sizing: border-box;
 }
 
+
+.payment-box {
+    background: #fff;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+}
+
+.payment-box h2 {
+    font-weight: 700;
+}
+
+.payment-box table th,
+.payment-box table td {
+    padding: 14px;
+    vertical-align: middle;
+}
+
+.payment-box .btn {
+    margin-top: 10px;
+}
+
 body {
     background: #f4fbff;
     font-family: Arial, sans-serif;
@@ -149,6 +171,16 @@ body {
 /* Tablet */
 @media (max-width: 768px) {
 
+
+
+    .payment-box {
+        padding: 20px;
+    }
+
+    .payment-box h2 {
+        font-size: 26px;
+    }
+
     .booking-box {
         padding: 25px;
     }
@@ -190,6 +222,26 @@ body {
 /* Mobile */
 @media (max-width: 576px) {
 
+
+    .payment-box {
+
+        padding: 15px;
+
+        border-radius: 15px;
+
+    }
+
+    .payment-box h2 {
+
+        font-size: 22px;
+
+    }
+
+    .payment-box table {
+
+        font-size: 13px;
+
+    }
 
     .membership-card,
     .history-box,
