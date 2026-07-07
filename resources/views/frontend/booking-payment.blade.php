@@ -85,7 +85,7 @@
 
             </table>
 
-            <form method="POST" action="{{ route('booking.confirm') }}">
+            <form id="paymentForm" method="POST" action="{{ route('booking.confirm') }}">
 
                 @csrf
 
@@ -153,15 +153,35 @@
 
     <script>
 
-        document
-            .getElementById('continueBtn')
-            .addEventListener('click', function () {
+        const form = document.getElementById('paymentForm');
 
-                this.disabled = true;
+        const btn = document.getElementById('continueBtn');
 
-                this.innerHTML = 'Please Wait...';
+        btn.addEventListener('click', function (e) {
 
-            });
+            e.preventDefault();
+
+            btn.disabled = true;
+
+            btn.innerHTML = "Please Wait...";
+
+            const method = document.querySelector(
+                'input[name="payment_method"]:checked'
+            ).value;
+
+            if (method === "online") {
+
+                form.action = "{{ route('booking.online.payment') }}";
+
+            } else {
+
+                form.action = "{{ route('booking.confirm') }}";
+
+            }
+
+            form.submit();
+
+        });
 
     </script>
 

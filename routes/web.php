@@ -118,4 +118,9 @@ Route::middleware('auth')->group(function () {
         '/booking/confirm',
         [BookingController::class, 'confirmBooking']
     )->name('booking.confirm');
+
+    Route::post(
+        '/booking/pay-online',
+        [BookingController::class, 'onlinePayment']
+    )->name('booking.online.payment');
 });

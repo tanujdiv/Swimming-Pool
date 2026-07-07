@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use App\Models\Membership;
 use App\Models\MembershipPurchase;
 use Illuminate\Support\Facades\Auth;
+use Razorpay\Api\Api;
 
 class BookingController extends Controller
 {
@@ -160,23 +161,23 @@ class BookingController extends Controller
         | Save Booking
         |--------------------------------------------------------------------------
         */
-        Booking::create([
-            'customer_name' => $request->customer_name,
-            'phone' => $request->phone,
-            'email' => $request->email,
-            'adults' => $request->adults,
-            'children' => $children,
-            'total_people' => $totalPeople,
-            'booking_date' => $bookingDate,
-            'start_time' => $start->format('H:i:s'),
-            'end_time' => $end->format('H:i:s'),
-            'start_at' => $startAt,
-            'end_at' => $endAt,
-            'duration_hours' => $request->duration_hours,
-            'total_price' => $price,
-            'full_pool' => false,
-            'status' => 'pending',
-        ]);
+        // Booking::create([
+        //     'customer_name' => $request->customer_name,
+        //     'phone' => $request->phone,
+        //     'email' => $request->email,
+        //     'adults' => $request->adults,
+        //     'children' => $children,
+        //     'total_people' => $totalPeople,
+        //     'booking_date' => $bookingDate,
+        //     'start_time' => $start->format('H:i:s'),
+        //     'end_time' => $end->format('H:i:s'),
+        //     'start_at' => $startAt,
+        //     'end_at' => $endAt,
+        //     'duration_hours' => $request->duration_hours,
+        //     'total_price' => $price,
+        //     'full_pool' => false,
+        //     'status' => 'pending',
+        // ]);
 
         return back()->with('success', 'Booking Successful');
     }
@@ -299,5 +300,74 @@ class BookingController extends Controller
                 'setting' => $setting,
             ]
         );
+    }
+
+    public function onlinePayment(Request $request)
+    {
+        $amount = $request->subtotal;
+
+        return view(
+            'frontend.razorpay-payment',
+            [
+                'booking' => $request->all(),
+                'amount' => $amount
+            ]
+        );
+    }
+
+    public function confirmBooking(Request $request)
+    {
+        $children = $request->children ?? 0;
+
+        $totalPeople = $request->adults + $children;
+
+        $start = Carbon::parse($request->start_time);
+
+        $end = $start->copy()->addMinutes($request->duration_hours * 60);
+
+        Booking::create([
+
+            'customer_name' => $request->customer_name,
+
+            'phone' => $request->phone,
+
+            'email' => $request->email,
+
+            'adults' => $request->adults,
+
+            'children' => $children,
+
+            'total_people' => $totalPeople,
+
+            'booking_date' => $request->booking_date,
+
+            'start_time' => $start->format('H:i:s'),
+
+            'end_time' => $end->format('H:i:s'),
+
+            'start_at' => Carbon::parse(
+                $request->booking_date . ' ' . $start->format('H:i:s')
+            ),
+
+            'end_at' => Carbon::parse(
+                $request->booking_date . ' ' . $end->format('H:i:s')
+            ),
+
+            'duration_hours' => $request->duration_hours,
+
+            'total_price' => $request->subtotal,
+
+            'payment_method' => 'offline',
+
+            'payment_status' => 'pending',
+
+            'status' => 'pending',
+
+            'full_pool' => false,
+        ]);
+
+        return redirect()
+            ->route('booking')
+            ->with('success', 'Booking Successfully Created.');
     }
 }
