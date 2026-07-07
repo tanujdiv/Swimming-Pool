@@ -50,6 +50,126 @@
 
         <hr class="my-4">
 
+
+    <h4 class="mb-4">
+        Payment Settings
+    </h4>
+
+    <div class="row">
+
+        <div class="col-md-6 mb-3">
+
+            <label class="form-label">
+
+                Enable Online Payment
+
+            </label>
+
+            <div class="form-check form-switch">
+
+                <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="pay_online"
+
+                    @checked($setting->pay_online)
+                >
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6 mb-3">
+
+            <label class="form-label">
+
+                Enable Pay On Pool
+
+            </label>
+
+            <div class="form-check form-switch">
+
+                <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="pay_on_pool"
+
+                    @checked($setting->pay_on_pool)
+                >
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-4 mb-3">
+
+            <label class="form-label">
+
+                Offline Charge
+
+            </label>
+
+            <input
+                type="number"
+                step="0.01"
+                name="offline_charge"
+
+                class="form-control"
+
+                value="{{ old('offline_charge',$setting->offline_charge) }}"
+            >
+
+        </div>
+
+        <div class="col-md-4 mb-3">
+
+            <label class="form-label">
+
+                Gateway Charge
+
+            </label>
+
+            <input
+                type="number"
+                step="0.01"
+                name="gateway_charge"
+
+                class="form-control"
+
+                value="{{ old('gateway_charge',$setting->gateway_charge) }}"
+            >
+
+        </div>
+
+        <div class="col-md-4 mb-3">
+
+            <label class="form-label">
+
+                GST %
+
+            </label>
+
+            <input
+                type="number"
+                step="0.01"
+                name="gst_percentage"
+
+                class="form-control"
+
+                value="{{ old('gst_percentage',$setting->gst_percentage) }}"
+            >
+
+        </div>
+
+    </div>
+
+        <hr class="my-4">
+
+
         <h4 class="mb-3">Duration Settings</h4>
 
         <label class="form-label">Minimum Duration (Hours)</label>

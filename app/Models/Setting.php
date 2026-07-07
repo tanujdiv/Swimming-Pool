@@ -15,6 +15,11 @@ class Setting extends Model
         'step_minutes',
         'children_enabled',
         'full_pool_enabled',
-        'booking_enabled'
+        'booking_enabled',
+        'pay_online',
+        'pay_on_pool',
+        'offline_charge',
+        'gateway_charge',
+        'gst_percentage',
     ];
 }
