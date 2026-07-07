@@ -241,4 +241,63 @@ class BookingController extends Controller
 
         return back()->with('success', 'Membership Renewed Successfully');
     }
+
+    public function paymentPage(Request $request)
+    {
+        $request->validate([
+            'customer_name' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'email' => 'nullable|email',
+            'adults' => 'required|integer|min:1',
+            'children' => 'nullable|integer|min:0',
+            'booking_date' => 'required|date',
+            'start_time' => 'required',
+            'duration_hours' => 'required|numeric|min:1',
+        ]);
+
+        $setting = Setting::first();
+
+        $children = $request->children ?? 0;
+
+        $price =
+            ($request->adults * $setting->adult_price * $request->duration_hours)
+            +
+            ($children * $setting->child_price * $request->duration_hours);
+
+        $discount = 0;
+
+        if ($request->coupon_code) {
+
+            $coupon = Coupon::where('code', $request->coupon_code)
+                ->where('is_active', true)
+                ->first();
+
+            if ($coupon) {
+
+                if ($coupon->discount_type == 'fixed') {
+
+                    $discount = $coupon->discount_value;
+                } else {
+
+                    $discount = ($price * $coupon->discount_value) / 100;
+                }
+            }
+        }
+
+        $price -= $discount;
+
+        if ($price < 0) {
+            $price = 0;
+        }
+
+        return view(
+            'frontend.booking-payment',
+            [
+                'requestData' => $request->all(),
+                'subtotal' => $price,
+                'discount' => $discount,
+                'setting' => $setting,
+            ]
+        );
+    }
 }

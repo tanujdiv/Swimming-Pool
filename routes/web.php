@@ -108,4 +108,14 @@ Route::middleware('auth')->group(function () {
         '/payment/create-order',
         [PaymentController::class, 'createOrder']
     )->name('payment.create');
+
+    Route::post(
+        '/booking/payment',
+        [BookingController::class, 'paymentPage']
+    )->name('booking.payment');
+
+    Route::post(
+        '/booking/confirm',
+        [BookingController::class, 'confirmBooking']
+    )->name('booking.confirm');
 });

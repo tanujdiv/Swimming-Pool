@@ -19,7 +19,7 @@
 
             <h2 class="mb-4">Book Swimming Slot</h2>
 
-            <form method="POST" action="{{ route('booking.store') }}">
+            <form method="POST" action="{{ route('booking.payment') }}">
                 @csrf
 
                 <label>Name</label>
