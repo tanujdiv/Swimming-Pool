@@ -71,13 +71,47 @@
                     </td>
                 </tr>
 
+                <tr>
+                    <th>Subtotal</th>
+                    <td>
+                        ₹<span id="subtotalText">
+                            {{ number_format($subtotal, 2) }}
+                        </span>
+                    </td>
+                </tr>
+
+                <tr id="offlineChargeRow" style="display:none;">
+                    <th>Pay On Pool Charge</th>
+                    <td>
+                        ₹<span id="offlineChargeText">
+                            {{ number_format($setting->offline_charge, 2) }}
+                        </span>
+                    </td>
+                </tr>
+
+                <tr id="gatewayChargeRow">
+                    <th>Gateway Charge</th>
+                    <td>
+                        ₹<span id="gatewayChargeText">
+                            {{ number_format($setting->gateway_charge, 2) }}
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>GST</th>
+                    <td>
+                        ₹<span id="gstAmount">0.00</span>
+                    </td>
+                </tr>
+
                 <tr class="table-primary">
 
-                    <th>Total Amount</th>
+                    <th>Final Amount</th>
 
                     <th>
 
-                        ₹{{ number_format($subtotal, 2) }}
+                        ₹<span id="finalAmount">0.00</span>
 
                     </th>
 
@@ -95,7 +129,13 @@
 
                 @endforeach
 
-                <input type="hidden" name="subtotal" value="{{ $subtotal }}">
+                <input type="hidden" id="subtotal_input" name="subtotal" value="{{ $subtotal }}">
+
+                <input type="hidden" id="offline_charge" value="{{ $setting->offline_charge }}">
+
+                <input type="hidden" id="gateway_charge" value="{{ $setting->gateway_charge }}">
+
+                <input type="hidden" id="gst_percentage" value="{{ $setting->gst_percentage }}">
 
                 <div class="mb-4">
 
@@ -153,11 +193,94 @@
 
     <script>
 
-        const form = document.getElementById('paymentForm');
+        const form = document.getElementById("paymentForm");
 
-        const btn = document.getElementById('continueBtn');
+        const btn = document.getElementById("continueBtn");
 
-        btn.addEventListener('click', function (e) {
+        function calculateTotal() {
+
+            let subtotal = parseFloat(
+                document.getElementById("subtotal_input").value
+            );
+
+            let originalSubtotal ={{ $subtotal }};
+
+            let offline = parseFloat(
+                document.getElementById("offline_charge").value
+            );
+
+            let gateway = parseFloat(
+                document.getElementById("gateway_charge").value
+            );
+
+            let gst = parseFloat(
+                document.getElementById("gst_percentage").value
+            );
+
+            let method = document.querySelector(
+                'input[name="payment_method"]:checked'
+            ).value;
+
+            subtotal = originalSubtotal;
+
+            if (method == "offline") {
+
+                document.getElementById(
+                    "offlineChargeRow"
+                ).style.display = "";
+
+                document.getElementById(
+                    "gatewayChargeRow"
+                ).style.display = "none";
+
+                subtotal += offline;
+
+            } else {
+
+                document.getElementById(
+                    "offlineChargeRow"
+                ).style.display = "none";
+
+                document.getElementById(
+                    "gatewayChargeRow"
+                ).style.display = "";
+
+                subtotal += gateway;
+
+            }
+
+            let gstAmount = (subtotal * gst) / 100;
+
+            let finalAmount = subtotal + gstAmount;
+
+            document.getElementById(
+                "gstAmount"
+            ).innerHTML = gstAmount.toFixed(2);
+
+            document.getElementById(
+                "finalAmount"
+            ).innerHTML = finalAmount.toFixed(2);
+
+            document.getElementById(
+                "subtotal_input"
+            ).value = finalAmount.toFixed(2);
+
+        }
+
+        document.querySelectorAll(
+            'input[name="payment_method"]'
+        ).forEach(function (item) {
+
+            item.addEventListener(
+                "change",
+                calculateTotal
+            );
+
+        });
+
+        calculateTotal();
+
+        btn.addEventListener("click", function (e) {
 
             e.preventDefault();
 
@@ -165,7 +288,7 @@
 
             btn.innerHTML = "Please Wait...";
 
-            const method = document.querySelector(
+            let method = document.querySelector(
                 'input[name="payment_method"]:checked'
             ).value;
 
