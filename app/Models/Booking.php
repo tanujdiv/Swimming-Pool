@@ -23,6 +23,11 @@ class Booking extends Model
         'total_price',
         'full_pool',
         'status',
+        'payment_method',
+        'payment_status',
+        'payment_id',
+        'razorpay_order_id',
+        'razorpay_signature',
     ];
 
     public function scopeActive($query)

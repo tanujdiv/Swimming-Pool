@@ -19,11 +19,23 @@ class PaymentController extends Controller
         );
 
         $order = $api->order->create([
-            'receipt' => 'ORDER_' . time(),
-            'amount' => $request->amount * 100,
+
+            'receipt' => 'BOOK_' . time(),
+
+            'amount' => intval($request->amount * 100),
+
             'currency' => 'INR',
+
+            'payment_capture' => 1,
+
         ]);
 
-        return response()->json($order);
+        return response()->json([
+
+            'success' => true,
+
+            'order' => $order
+
+        ]);
     }
 }

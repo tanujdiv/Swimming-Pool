@@ -317,6 +317,23 @@ class BookingController extends Controller
 
     public function confirmBooking(Request $request)
     {
+        $request->validate([
+            'customer_name'      => 'required|string|max:255',
+            'phone'              => 'required|string|max:20',
+            'email'              => 'nullable|email',
+            'adults'             => 'required|integer|min:1',
+            'children'           => 'nullable|integer|min:0',
+            'booking_date'       => 'required|date',
+            'start_time'         => 'required',
+            'duration_hours'     => 'required|numeric|min:1',
+            'subtotal'           => 'required|numeric',
+
+            'payment_method'     => 'required|in:online,offline',
+
+            'payment_id'         => 'nullable|string',
+            'razorpay_order_id'  => 'nullable|string',
+        ]);
+
         $children = $request->children ?? 0;
 
         $totalPeople = $request->adults + $children;
@@ -357,9 +374,15 @@ class BookingController extends Controller
 
             'total_price' => $request->subtotal,
 
-            'payment_method' => 'offline',
+            'payment_method' => $request->payment_method,
 
-            'payment_status' => 'pending',
+            'payment_status' => $request->payment_method == 'online'
+                ? 'paid'
+                : 'pending',
+
+            'payment_id' => $request->payment_id,
+
+            'razorpay_order_id' => $request->razorpay_order_id,
 
             'status' => 'pending',
 

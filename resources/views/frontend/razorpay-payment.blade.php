@@ -37,6 +37,22 @@
 
             </button>
 
+            <form id="successForm" method="POST" action="{{ route('booking.confirm') }}">
+
+                @csrf
+
+                @foreach($booking as $key => $value)
+
+                    <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+
+                @endforeach
+
+                <input type="hidden" name="payment_id" id="payment_id">
+
+                <input type="hidden" name="razorpay_order_id" id="order_id">
+
+            </form>
+
         </div>
 
     </div>
@@ -45,37 +61,69 @@
 
     <script>
 
-        var options = {
+        fetch("{{ route('payment.create') }}", {
 
-            key: "{{ config('razorpay.key') }}",
+            method: "POST",
 
-            amount:{{ $amount * 100 }},
+            headers: {
 
-            currency: "INR",
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
 
-            name: "Swimming Pool",
+                'Content-Type': 'application/json'
 
-            description: "Booking Payment",
+            },
 
-            handler: function (response) {
+            body: JSON.stringify({
 
-                alert("Payment Successful");
+                amount:{{ $amount }}
 
-            }
+            })
 
-        };
+        })
 
-        var rzp = new Razorpay(options);
+            .then(res => res.json())
 
-        document
-            .getElementById('rzp-button')
-            .onclick = function (e) {
+            .then(data => {
 
-                rzp.open();
+                let options = {
 
-                e.preventDefault();
+                    key: "{{ config('razorpay.key') }}",
 
-            }
+                    amount: data.order.amount,
+
+                    currency: data.order.currency,
+
+                    name: "Swimming Pool",
+
+                    description: "Swimming Pool Booking",
+
+                    order_id: data.order.id,
+
+                    handler: function (response) {
+
+                        document.getElementById('payment_id').value =
+
+                            response.razorpay_payment_id;
+
+                        document.getElementById('order_id').value =
+
+                            response.razorpay_order_id;
+
+                        document.getElementById('successForm').submit();
+
+                    },
+
+                    theme: {
+
+                        color: "#0d6efd"
+
+                    }
+
+                };
+
+                new Razorpay(options).open();
+
+            });
 
     </script>
 
