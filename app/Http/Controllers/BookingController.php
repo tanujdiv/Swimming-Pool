@@ -338,6 +338,8 @@ class BookingController extends Controller
             'razorpay_signature' => 'nullable|string',
         ]);
 
+
+
         if ($request->payment_method == 'online') {
 
             $api = new Api(
@@ -369,7 +371,73 @@ class BookingController extends Controller
             }
         }
 
+        $setting = Setting::first();
+
+        if (!$setting) {
+            return redirect()
+                ->route('booking')
+                ->with('error', 'Pool settings not configured.');
+        }
+
         $children = $request->children ?? 0;
+
+        $calculatedAmount =
+            ($request->adults * $setting->adult_price * $request->duration_hours)
+            +
+            ($children * $setting->child_price * $request->duration_hours);
+
+        // Coupon
+        if ($request->coupon_code) {
+
+            $coupon = Coupon::where('code', $request->coupon_code)
+                ->where('is_active', true)
+                ->where(function ($q) {
+                    $q->whereNull('expires_at')
+                        ->orWhere('expires_at', '>=', now()->toDateString());
+                })
+                ->first();
+
+            if ($coupon) {
+
+                if ($coupon->discount_type == 'fixed') {
+                    $calculatedAmount -= $coupon->discount_value;
+                } else {
+                    $calculatedAmount -= ($calculatedAmount * $coupon->discount_value) / 100;
+                }
+            }
+        }
+
+        if ($calculatedAmount < 0) {
+            $calculatedAmount = 0;
+        }
+
+        // Gateway / Offline Charge
+        if ($request->payment_method == 'online') {
+            $calculatedAmount += $setting->gateway_charge;
+        } else {
+            $calculatedAmount += $setting->offline_charge;
+        }
+
+        // GST
+        $gst = ($calculatedAmount * $setting->gst_percentage) / 100;
+
+        $calculatedAmount += $gst;
+
+        $calculatedAmount = round($calculatedAmount, 2);
+
+        if (round((float) $request->subtotal, 2) != $calculatedAmount) {
+
+            return redirect()
+                ->route('booking')
+                ->with('error', 'Invalid payment amount.');
+        }
+
+        if ((float) $request->subtotal !== (float) $calculatedAmount) {
+
+            return redirect()
+                ->route('booking')
+                ->with('error', 'Invalid payment amount.');
+        }
 
         $totalPeople = $request->adults + $children;
 
@@ -377,12 +445,15 @@ class BookingController extends Controller
 
         $end = $start->copy()->addMinutes($request->duration_hours * 60);
 
+
+
         DB::transaction(function () use (
             $request,
             $children,
             $totalPeople,
             $start,
-            $end
+            $end,
+            $calculatedAmount,
         ) {
 
             $booking = Booking::create([
@@ -415,7 +486,7 @@ class BookingController extends Controller
 
                 'duration_hours' => $request->duration_hours,
 
-                'total_price' => $request->subtotal,
+                'total_price' => $calculatedAmount,
 
                 'payment_method' => $request->payment_method,
 
@@ -449,7 +520,7 @@ class BookingController extends Controller
 
                 'razorpay_signature' => $request->razorpay_signature,
 
-                'amount' => $request->subtotal,
+                'amount' => $calculatedAmount,
 
                 'payment_for' => 'booking',
 

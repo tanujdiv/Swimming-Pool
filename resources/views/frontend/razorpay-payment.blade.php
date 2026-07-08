@@ -114,7 +114,7 @@
 
                         document.getElementById("successForm").submit();
 
-                    }
+                    },
 
                         theme: {
 
