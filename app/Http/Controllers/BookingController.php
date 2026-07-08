@@ -13,6 +13,9 @@ use App\Models\Membership;
 use App\Models\MembershipPurchase;
 use Illuminate\Support\Facades\Auth;
 use Razorpay\Api\Api;
+use Razorpay\Api\Errors\SignatureVerificationError;
+use App\Models\Payment;
+use Illuminate\Support\Facades\DB;
 
 class BookingController extends Controller
 {
@@ -332,7 +335,39 @@ class BookingController extends Controller
 
             'payment_id'         => 'nullable|string',
             'razorpay_order_id'  => 'nullable|string',
+            'razorpay_signature' => 'nullable|string',
         ]);
+
+        if ($request->payment_method == 'online') {
+
+            $api = new Api(
+
+                config('razorpay.key'),
+
+                config('razorpay.secret')
+
+            );
+
+            try {
+
+                $api->utility->verifyPaymentSignature([
+
+                    'razorpay_order_id' => $request->razorpay_order_id,
+
+                    'razorpay_payment_id' => $request->payment_id,
+
+                    'razorpay_signature' => $request->razorpay_signature,
+
+                ]);
+            } catch (SignatureVerificationError $e) {
+
+                return redirect()
+
+                    ->route('booking')
+
+                    ->with('error', 'Payment verification failed.');
+            }
+        }
 
         $children = $request->children ?? 0;
 
@@ -342,53 +377,88 @@ class BookingController extends Controller
 
         $end = $start->copy()->addMinutes($request->duration_hours * 60);
 
-        Booking::create([
+        DB::transaction(function () use (
+            $request,
+            $children,
+            $totalPeople,
+            $start,
+            $end
+        ) {
 
-            'customer_name' => $request->customer_name,
+            $booking = Booking::create([
 
-            'phone' => $request->phone,
+                'customer_name' => $request->customer_name,
 
-            'email' => $request->email,
+                'phone' => $request->phone,
 
-            'adults' => $request->adults,
+                'email' => $request->email,
 
-            'children' => $children,
+                'adults' => $request->adults,
 
-            'total_people' => $totalPeople,
+                'children' => $children,
 
-            'booking_date' => $request->booking_date,
+                'total_people' => $totalPeople,
 
-            'start_time' => $start->format('H:i:s'),
+                'booking_date' => $request->booking_date,
 
-            'end_time' => $end->format('H:i:s'),
+                'start_time' => $start->format('H:i:s'),
 
-            'start_at' => Carbon::parse(
-                $request->booking_date . ' ' . $start->format('H:i:s')
-            ),
+                'end_time' => $end->format('H:i:s'),
 
-            'end_at' => Carbon::parse(
-                $request->booking_date . ' ' . $end->format('H:i:s')
-            ),
+                'start_at' => Carbon::parse(
+                    $request->booking_date . ' ' . $start->format('H:i:s')
+                ),
 
-            'duration_hours' => $request->duration_hours,
+                'end_at' => Carbon::parse(
+                    $request->booking_date . ' ' . $end->format('H:i:s')
+                ),
 
-            'total_price' => $request->subtotal,
+                'duration_hours' => $request->duration_hours,
 
-            'payment_method' => $request->payment_method,
+                'total_price' => $request->subtotal,
 
-            'payment_status' => $request->payment_method == 'online'
-                ? 'paid'
-                : 'pending',
+                'payment_method' => $request->payment_method,
 
-            'payment_id' => $request->payment_id,
+                'payment_status' => $request->payment_method == 'online'
+                    ? 'paid'
+                    : 'pending',
 
-            'razorpay_order_id' => $request->razorpay_order_id,
+                'payment_id' => $request->payment_id,
 
-            'status' => 'pending',
+                'razorpay_order_id' => $request->razorpay_order_id,
 
-            'full_pool' => false,
-        ]);
+                'razorpay_signature' => $request->razorpay_signature,
 
+                'status' => 'pending',
+
+                'full_pool' => false,
+
+            ]);
+
+            Payment::create([
+
+                'user_id' => Auth::id(),
+
+                'booking_id' => $booking->id,
+
+                'membership_purchase_id' => null,
+
+                'razorpay_order_id' => $request->razorpay_order_id,
+
+                'razorpay_payment_id' => $request->payment_id,
+
+                'razorpay_signature' => $request->razorpay_signature,
+
+                'amount' => $request->subtotal,
+
+                'payment_for' => 'booking',
+
+                'status' => $request->payment_method == 'online'
+                    ? 'paid'
+                    : 'pending',
+
+            ]);
+        });
         return redirect()
             ->route('booking')
             ->with('success', 'Booking Successfully Created.');

@@ -49,6 +49,8 @@
 
                 <input type="hidden" name="payment_id" id="payment_id">
 
+                <input type="hidden" name="razorpay_signature" id="signature">
+
                 <input type="hidden" name="razorpay_order_id" id="order_id">
 
             </form>
@@ -77,7 +79,7 @@
 
                 amount:{{ $amount }}
 
-            })
+                    })
 
         })
 
@@ -101,19 +103,20 @@
 
                     handler: function (response) {
 
-                        document.getElementById('payment_id').value =
-
+                        document.getElementById("payment_id").value =
                             response.razorpay_payment_id;
 
-                        document.getElementById('order_id').value =
-
+                        document.getElementById("order_id").value =
                             response.razorpay_order_id;
 
-                        document.getElementById('successForm').submit();
+                        document.getElementById("signature").value =
+                            response.razorpay_signature;
 
-                    },
+                        document.getElementById("successForm").submit();
 
-                    theme: {
+                    }
+
+                        theme: {
 
                         color: "#0d6efd"
 
