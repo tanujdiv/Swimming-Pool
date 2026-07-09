@@ -47,6 +47,9 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/notifications', [NotificationController::class, 'index'])
         ->name('admin.notifications');
 
+    Route::post('/admin/notifications/{notification}/read', [NotificationController::class, 'markAsRead'])
+        ->name('admin.notifications.read');
+
     Route::get('/admin/memberships', [MembershipController::class, 'index'])
         ->name('admin.memberships');
 
