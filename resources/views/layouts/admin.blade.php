@@ -66,8 +66,19 @@
                 <h4>Admin Dashboard</h4>
 
                 <a href="{{ route('admin.notifications') }}" class="notification-bell">
+
                     🔔
-                    <span class="notification-count">0</span>
+
+                    @if($unreadNotifications > 0)
+
+                        <span class="notification-count">
+
+                            {{ $unreadNotifications }}
+
+                        </span>
+
+                    @endif
+
                 </a>
             </div>
 
