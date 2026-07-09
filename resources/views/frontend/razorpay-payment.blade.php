@@ -63,29 +63,27 @@
 
     <script>
 
+        console.log("Blade Amount =", {{ $amount }});
+
         fetch("{{ route('payment.create') }}", {
-
             method: "POST",
-
             headers: {
-
-                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-
-                'Content-Type': 'application/json'
-
+                "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                "Content-Type": "application/json",
+                "Accept": "application/json"
             },
-
             body: JSON.stringify({
-
-                amount:{{ $amount }}
-
-                    })
-
+                amount: {{ $amount }}
         })
-
-            .then(res => res.json())
-
+        })
+            .then(res => {
+                console.log("Status:", res.status);
+                return res.json();
+            })
             .then(data => {
+
+                console.log("Full Response:", data);
+                console.log("Order Object:", data.order);
 
                 let options = {
 
@@ -101,7 +99,22 @@
 
                     order_id: data.order.id,
 
+                    prefill: {
+                        name: "{{ $booking['customer_name'] }}",
+                        contact: "{{ $booking['phone'] }}",
+                        email: "{{ $booking['email'] }}"
+                    },
+
+                    notes: {
+                        booking: "Swimming Pool"
+                    },
+
                     handler: function (response) {
+
+                        console.log("SUCCESS");
+                        console.log(response);
+
+                        alert("Payment Success");
 
                         document.getElementById("payment_id").value =
                             response.razorpay_payment_id;
@@ -113,19 +126,27 @@
                             response.razorpay_signature;
 
                         document.getElementById("successForm").submit();
-
                     },
 
-                        theme: {
+                    modal: {
+                        ondismiss: function () {
+                            console.log("Popup Closed");
+                        }
+                    },
 
+                    theme: {
                         color: "#0d6efd"
-
                     }
 
                 };
 
+                console.log("Options:", options);
+
                 new Razorpay(options).open();
 
+            })
+            .catch(err => {
+                console.error(err);
             });
 
     </script>

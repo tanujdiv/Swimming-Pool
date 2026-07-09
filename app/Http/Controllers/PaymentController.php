@@ -9,33 +9,36 @@ class PaymentController extends Controller
 {
     public function createOrder(Request $request)
     {
-        $request->validate([
-            'amount' => 'required|numeric|min:1',
-        ]);
+        try {
 
-        $api = new Api(
-            config('razorpay.key'),
-            config('razorpay.secret')
-        );
+            $request->validate([
+                'amount' => 'required|numeric|min:1',
+            ]);
 
-        $order = $api->order->create([
+            $api = new Api(
+                config('razorpay.key'),
+                config('razorpay.secret')
+            );
 
-            'receipt' => 'BOOK_' . time(),
+            $order = $api->order->create([
+                'receipt' => 'BOOK_' . time(),
+                'amount' => intval($request->amount * 100),
+                'currency' => 'INR',
+                'payment_capture' => 1,
+            ]);
 
-            'amount' => intval($request->amount * 100),
+            return response()->json([
+                'success' => true,
+                'order' => $order->toArray(),
+            ]);
+        } catch (\Throwable $e) {
 
-            'currency' => 'INR',
-
-            'payment_capture' => 1,
-
-        ]);
-
-        return response()->json([
-
-            'success' => true,
-
-            'order' => $order
-
-        ]);
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+            ], 500);
+        }
     }
 }
