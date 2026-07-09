@@ -50,6 +50,12 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/admin/notifications/{notification}/read', [NotificationController::class, 'markAsRead'])
         ->name('admin.notifications.read');
 
+    Route::post('/admin/notifications/read-all', [NotificationController::class, 'markAllRead'])
+        ->name('admin.notifications.readAll');
+
+    Route::delete('/admin/notifications/{notification}', [NotificationController::class, 'destroy'])
+        ->name('admin.notifications.delete');
+
     Route::get('/admin/memberships', [MembershipController::class, 'index'])
         ->name('admin.memberships');
 

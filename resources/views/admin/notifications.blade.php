@@ -8,6 +8,18 @@
             Notifications
         </h2>
 
+        <form method="POST" action="{{ route('admin.notifications.readAll') }}" class="mb-4">
+
+            @csrf
+
+            <button class="btn btn-primary">
+
+                Mark All as Read
+
+            </button>
+
+        </form>
+
         @forelse($notifications as $notification)
 
             <div class="card mb-3">
@@ -59,6 +71,20 @@
                                 </span>
 
                             @endif
+
+                            <form method="POST" action="{{ route('admin.notifications.delete', $notification) }}" class="mt-2">
+
+                                @csrf
+
+                                @method('DELETE')
+
+                                <button class="btn btn-danger btn-sm" onclick="return confirm('Delete this notification?')">
+
+                                    Delete
+
+                                </button>
+
+                            </form>
 
                         </div>
 

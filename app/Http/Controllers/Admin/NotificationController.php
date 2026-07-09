@@ -17,12 +17,22 @@ class NotificationController extends Controller
         );
     }
 
-    public function markAsRead(Notification $notification)
+    public function markAllRead()
     {
-        $notification->update([
-            'is_read' => true
-        ]);
+        Notification::where('is_read', false)
+            ->update([
+                'is_read' => true
+            ]);
 
-        return back();
+        return back()
+            ->with('success', 'All notifications marked as read.');
+    }
+
+    public function destroy(Notification $notification)
+    {
+        $notification->delete();
+
+        return back()
+            ->with('success', 'Notification deleted successfully.');
     }
 }
