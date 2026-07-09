@@ -16,6 +16,7 @@ use Razorpay\Api\Api;
 use Razorpay\Api\Errors\SignatureVerificationError;
 use App\Models\Payment;
 use Illuminate\Support\Facades\DB;
+use App\Models\Notification;
 
 class BookingController extends Controller
 {
@@ -503,6 +504,20 @@ class BookingController extends Controller
                 'status' => 'pending',
 
                 'full_pool' => false,
+
+            ]);
+
+
+            Notification::create([
+
+                'title' => 'New Booking',
+
+                'message' =>
+                $booking->customer_name .
+                    ' booked a slot on ' .
+                    $booking->booking_date .
+                    ' at ' .
+                    $booking->start_time,
 
             ]);
 
