@@ -17,6 +17,8 @@ use Razorpay\Api\Errors\SignatureVerificationError;
 use App\Models\Payment;
 use Illuminate\Support\Facades\DB;
 use App\Models\Notification;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\BookingInvoice;
 
 class BookingController extends Controller
 {
@@ -544,6 +546,12 @@ class BookingController extends Controller
                     : 'pending',
 
             ]);
+            
+            if ($booking->email) {
+
+                Mail::to($booking->email)
+                    ->send(new BookingInvoice($booking));
+            }
         });
         return redirect()
             ->route('booking')
