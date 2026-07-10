@@ -22,6 +22,9 @@ class BookingManagementController extends Controller
     {
         $booking->status = 'checked_in';
         $booking->payment_status = 'paid';
+        if ($booking->due!=null) {
+            $booking->due=null;
+        }
         $booking->save();
 
         $payment = Payment::where('booking_id', $booking->id)->first();
@@ -76,7 +79,10 @@ class BookingManagementController extends Controller
 
         $booking->duration_hours += $extraHours;
         $booking->total_price += $extraPrice;
-        $booking->save();
+        $booking->due=$extraPrice;
+        $booking->payment_status="extend pay due";
+        $booking->save();  
+
 
         return back()->with('success', 'Booking Extended');
     }

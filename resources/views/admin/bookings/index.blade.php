@@ -34,20 +34,34 @@
                         <td>{{ $booking->adults }}</td>
                         <td>{{ $booking->children }}</td>
                         <td>{{ $booking->status }}</td>
-                        <td>{{ $booking->total_price }}</td>
+                        <td>{{ $booking->total_price }} @if ($booking->due != null)
+                            <br>
+                            <span style="background: yellow ; color: black;">{{ $booking->due }}</span>
+                        @endif
+                        </td>
                         <td>{{ $booking->payment_method }}</td>
                         <td>{{ $booking->payment_status }}</td>
                         <td>
-                            <form method="POST" action="{{ route('admin.booking.checkin', $booking->id) }}" class="mb-1">
-                                @csrf
-                                <button class="btn btn-success btn-sm">Check-In</button>
-                            </form>
+                            @if ($booking->status == "pending"|| $booking->due != null)
+                                <form method="POST" action="{{ route('admin.booking.checkin', $booking->id) }}" class="mb-1">
+                                    @csrf
+                                    <button class="btn btn-success btn-sm">
+                                        @if ( $booking->due != null)
+                                            Extend Charge Payed                                            
+                                        @else
+                                            Check-In
+                                        @endif
+                                        </button>
+                                </form>
 
-                            <form method="POST" action="{{ route('admin.booking.checkout', $booking->id) }}" class="mb-1">
-                                @csrf
-                                <button class="btn btn-danger btn-sm">Check-Out</button>
-                            </form>
+                            @endif
+                            @if ($booking->status == "checked_in" && $booking->payment_status=="paid")
 
+                                <form method="POST" action="{{ route('admin.booking.checkout', $booking->id) }}" class="mb-1">
+                                    @csrf
+                                    <button class="btn btn-danger btn-sm">Check-Out</button>
+                                </form>
+                            @endif
 
                             @if ($booking->status == "checked_in")
 
