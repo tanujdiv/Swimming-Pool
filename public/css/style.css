@@ -1313,7 +1313,7 @@ BOOKING PAYMENT / SUMMARY PAGE
     border-color: rgba(255, 255, 255, 0.15) !important;
 }
 
-.booking-payment-table th, 
+.booking-payment-table th,
 .booking-payment-table td {
     padding: 14px 18px !important;
     color: #fff !important;
@@ -1326,7 +1326,8 @@ BOOKING PAYMENT / SUMMARY PAGE
 }
 
 .booking-payment-table .discount-text {
-    color: #2ed573 !important; /* Soft bright green for contrast */
+    color: #2ed573 !important;
+    /* Soft bright green for contrast */
     font-weight: 600;
 }
 
@@ -1406,6 +1407,7 @@ Responsive Media Queries
     .booking-payment-title {
         font-size: 30px;
     }
+
     .booking-payment-table .final-amount-row th {
         font-size: 18px;
     }
@@ -1439,8 +1441,8 @@ Responsive Media Queries
         font-size: 16px;
         padding: 14px;
     }
-    
-    .booking-payment-table th, 
+
+    .booking-payment-table th,
     .booking-payment-table td {
         padding: 10px 12px !important;
         font-size: 14px;
@@ -1457,7 +1459,8 @@ BOOKING GATEWAY PAGE
 }
 
 .booking-gateway-card {
-    max-width: 600px; /* Reduced container size specifically for payment action */
+    max-width: 600px;
+    /* Reduced container size specifically for payment action */
     margin: auto;
     background: rgba(255, 255, 255, .12);
     backdrop-filter: blur(20px);
@@ -1502,7 +1505,7 @@ BOOKING GATEWAY PAGE
     border-color: rgba(255, 255, 255, 0.15) !important;
 }
 
-.booking-gateway-table th, 
+.booking-gateway-table th,
 .booking-gateway-table td {
     padding: 14px 18px !important;
     color: #fff !important;
@@ -1563,6 +1566,7 @@ Responsive Media Queries
     .booking-gateway-title {
         font-size: 28px;
     }
+
     .booking-gateway-table .gateway-amount-row th {
         font-size: 18px;
     }
@@ -1596,8 +1600,8 @@ Responsive Media Queries
         font-size: 16px;
         padding: 14px;
     }
-    
-    .booking-gateway-table th, 
+
+    .booking-gateway-table th,
     .booking-gateway-table td {
         padding: 10px 12px !important;
         font-size: 14px;
@@ -1644,7 +1648,7 @@ MEMBERSHIP PLAN PAGE
     background: #fff;
     color: #0072ff;
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 /* Membership Card Glassmorphism Effect */
@@ -1719,7 +1723,7 @@ MEMBERSHIP PLAN PAGE
 }
 
 .membership-plan-input:focus {
-    box-shadow: 0 0 0 .25rem rgba(0,198,255,.25);
+    box-shadow: 0 0 0 .25rem rgba(0, 198, 255, .25);
     border: none;
     background: #fff;
 }
@@ -1756,6 +1760,7 @@ Responsive Media Queries
     .membership-plan-main-title {
         font-size: 30px;
     }
+
     .membership-plan-card {
         padding: 30px 20px;
     }
@@ -1806,5 +1811,189 @@ Responsive Media Queries
     .membership-plan-btn {
         font-size: 15px;
         padding: 12px;
+    }
+}
+
+
+/*==================================
+MEMBERSHIP HISTORY PAGE
+==================================*/
+
+.membership-history-wrapper {
+    padding: 80px 0;
+}
+
+.membership-history-card {
+    max-width: 1000px;
+    margin: auto;
+    background: rgba(255, 255, 255, .12);
+    backdrop-filter: blur(20px);
+    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, .15);
+    padding: 45px;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, .25);
+}
+
+.membership-history-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.membership-history-icon {
+    width: 90px;
+    height: 90px;
+    margin: auto;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    margin-bottom: 20px;
+}
+
+.membership-history-title {
+    color: #fff;
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.membership-history-subtitle {
+    color: #d8ecff;
+    margin-top: 10px;
+}
+
+/* Custom Styled History Table */
+.membership-history-table {
+    margin-bottom: 0;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+.membership-history-table thead th {
+    background: rgba(0, 114, 255, 0.2) !important;
+    color: #00c6ff !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    padding: 16px !important;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+.membership-history-table tbody td {
+    padding: 16px !important;
+    color: #fff !important;
+    background: transparent !important;
+    font-weight: 500;
+}
+
+.membership-history-table .plan-name-cell {
+    font-weight: 600;
+    color: #fff !important;
+}
+
+.membership-history-table .no-action-dash {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.membership-history-table .empty-history-text {
+    color: #d8ecff !important;
+    font-size: 16px;
+}
+
+/* Custom Glassmorphism Status Tags */
+.membership-history-status {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.membership-history-status.status-active {
+    background: rgba(46, 213, 115, 0.15);
+    border: 1px solid rgba(46, 213, 115, 0.4);
+    color: #2ed573;
+}
+
+.membership-history-status.status-warning {
+    background: rgba(25ffa, 165, 2, 0.15);
+    border: 1px solid rgba(255, 165, 2, 0.4);
+    color: #ffa500;
+}
+
+.membership-history-status.status-expired {
+    background: rgba(255, 71, 87, 0.15);
+    border: 1px solid rgba(255, 71, 87, 0.4);
+    color: #ff4757;
+}
+
+/* Action Renew Button */
+.membership-history-renew-btn {
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(135deg, #ffa500, #ff4757);
+    transition: .3s;
+}
+
+.membership-history-renew-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(255, 71, 87, 0.3);
+}
+
+/*==========================
+Responsive Media Queries
+==========================*/
+
+@media(max-width:992px) {
+    .membership-history-card {
+        padding: 35px;
+    }
+}
+
+@media(max-width:768px) {
+    .membership-history-title {
+        font-size: 30px;
+    }
+}
+
+@media(max-width:576px) {
+    .membership-history-wrapper {
+        padding: 40px 15px;
+    }
+
+    .membership-history-card {
+        padding: 22px;
+        border-radius: 18px;
+    }
+
+    .membership-history-title {
+        font-size: 26px;
+    }
+
+    .membership-history-subtitle {
+        font-size: 15px;
+    }
+
+    .membership-history-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 30px;
+    }
+
+    .membership-history-table thead th,
+    .membership-history-table tbody td {
+        padding: 12px 10px !important;
+        font-size: 13px;
+    }
+
+    .membership-history-status {
+        padding: 4px 10px;
+        font-size: 12px;
     }
 }
