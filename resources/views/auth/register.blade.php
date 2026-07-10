@@ -1,28 +1,93 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="auth-page">
-        <div class="auth-box">
-            <h2>Create Account</h2>
+
+    <div class="register-page-wrapper">
+
+        <div class="register-page-card">
+
+            <div class="register-page-icon">
+                <i class="bi bi-person-plus-fill"></i>
+            </div>
+
+            <h2 class="register-page-title">
+                Create Account
+            </h2>
+
+            <p class="register-page-subtitle">
+                Join Aqua Pool and start booking your swimming sessions.
+            </p>
 
             <form method="POST" action="/register">
+
                 @csrf
 
-                <input type="text" name="name" class="form-control mb-3" placeholder="Name">
+                <div class="mb-3">
 
-                <input type="email" name="email" class="form-control mb-3" placeholder="Email">
+                    <label class="register-page-label">
+                        Full Name
+                    </label>
 
-                <input type="password" name="password" class="form-control mb-3" placeholder="Password">
+                    <input type="text" name="name" class="form-control register-page-input"
+                        placeholder="Enter your full name">
 
-                <input type="password" name="password_confirmation" class="form-control mb-3"
-                    placeholder="Confirm Password">
+                </div>
 
-                <button class="btn btn-primary w-100">Register</button>
+                <div class="mb-3">
+
+                    <label class="register-page-label">
+                        Email Address
+                    </label>
+
+                    <input type="email" name="email" class="form-control register-page-input"
+                        placeholder="Enter your email">
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="register-page-label">
+                        Password
+                    </label>
+
+                    <input type="password" name="password" class="form-control register-page-input"
+                        placeholder="Create password">
+
+                </div>
+
+                <div class="mb-4">
+
+                    <label class="register-page-label">
+                        Confirm Password
+                    </label>
+
+                    <input type="password" name="password_confirmation" class="form-control register-page-input"
+                        placeholder="Confirm password">
+
+                </div>
+
+                <button class="register-page-btn">
+
+                    Create Account
+
+                </button>
+
             </form>
 
-            <p class="mt-3 text-center">
-                Already registered? <a href="/login">Login</a>
-            </p>
+            <div class="register-page-footer">
+
+                Already have an account?
+
+                <a href="/login">
+
+                    Login
+
+                </a>
+
+            </div>
+
         </div>
+
     </div>
+
 @endsection
