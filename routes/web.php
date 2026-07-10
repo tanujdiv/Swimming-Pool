@@ -44,6 +44,8 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/booking/{booking}/extend', [BookingManagementController::class, 'extend'])
         ->name('admin.booking.extend');
 
+        
+
     Route::get('/admin/notifications', [NotificationController::class, 'index'])
         ->name('admin.notifications');
 

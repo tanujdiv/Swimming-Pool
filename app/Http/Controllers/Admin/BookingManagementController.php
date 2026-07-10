@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
+use App\Models\Payment;
 use App\Models\PoolInfo;
 use App\Models\Setting;
 use Carbon\Carbon;
@@ -20,7 +21,15 @@ class BookingManagementController extends Controller
     public function checkIn(Booking $booking)
     {
         $booking->status = 'checked_in';
+        $booking->payment_status = 'paid';
         $booking->save();
+
+        $payment = Payment::where('booking_id', $booking->id)->first();
+
+        if ($payment) {
+            $payment->status = 'received on pool';
+            $payment->save();
+        }
 
         return back()->with('success', 'Customer Checked In');
     }
