@@ -1603,3 +1603,208 @@ Responsive Media Queries
         font-size: 14px;
     }
 }
+
+
+/*==================================
+MEMBERSHIP PLAN PAGE
+==================================*/
+
+.membership-plan-wrapper {
+    padding: 80px 0;
+}
+
+.membership-plan-top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1140px;
+    margin: 0 auto 40px auto;
+}
+
+.membership-plan-main-title {
+    color: #fff;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+.membership-plan-history-btn {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, .25);
+    background: rgba(255, 255, 255, .1);
+    backdrop-filter: blur(10px);
+    transition: 0.3s;
+}
+
+.membership-plan-history-btn:hover {
+    background: #fff;
+    color: #0072ff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* Membership Card Glassmorphism Effect */
+.membership-plan-card {
+    background: rgba(255, 255, 255, .12);
+    backdrop-filter: blur(20px);
+    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, .15);
+    padding: 35px 25px;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, .25);
+    text-align: center;
+    position: relative;
+    transition: 0.3s ease-in-out;
+}
+
+.membership-plan-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(0, 198, 255, 0.4);
+    box-shadow: 0 20px 50px rgba(0, 180, 255, 0.25);
+}
+
+.membership-plan-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    background: linear-gradient(135deg, rgba(0, 198, 255, 0.2), rgba(0, 114, 255, 0.2));
+    border: 1px solid rgba(0, 198, 255, 0.3);
+    color: #00c6ff;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.membership-plan-name {
+    color: #fff;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.membership-plan-price-box {
+    margin-bottom: 25px;
+    padding: 15px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.membership-plan-price {
+    color: #fff;
+    font-size: 38px;
+    font-weight: 800;
+    margin-bottom: 5px;
+    background: linear-gradient(135deg, #fff, #d8ecff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.membership-plan-days {
+    color: #d8ecff;
+    font-size: 15px;
+    margin-bottom: 0;
+    font-weight: 500;
+}
+
+/* Inputs styling */
+.membership-plan-input {
+    border: none;
+    border-radius: 12px;
+    padding: 12px;
+    background: rgba(255, 255, 255, .92);
+    font-weight: 500;
+}
+
+.membership-plan-input:focus {
+    box-shadow: 0 0 0 .25rem rgba(0,198,255,.25);
+    border: none;
+    background: #fff;
+}
+
+/* Form Action Button */
+.membership-plan-btn {
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    transition: .3s;
+    margin-top: 5px;
+}
+
+.membership-plan-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(0, 180, 255, .35);
+}
+
+.membership-plan-alert {
+    max-width: 1140px;
+    margin: 0 auto 25px auto;
+}
+
+/*==========================
+Responsive Media Queries
+==========================*/
+
+@media(max-width: 992px) {
+    .membership-plan-main-title {
+        font-size: 30px;
+    }
+    .membership-plan-card {
+        padding: 30px 20px;
+    }
+}
+
+@media(max-width: 768px) {
+    .membership-plan-top-header {
+        margin: 0 15px 30px 15px;
+    }
+}
+
+@media(max-width: 576px) {
+    .membership-plan-wrapper {
+        padding: 40px 15px;
+    }
+
+    .membership-plan-top-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        margin: 0 0 30px 0;
+    }
+
+    .membership-plan-main-title {
+        font-size: 26px;
+    }
+
+    .membership-plan-history-btn {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        font-size: 15px;
+    }
+
+    .membership-plan-card {
+        padding: 25px 20px;
+        border-radius: 20px;
+    }
+
+    .membership-plan-name {
+        font-size: 22px;
+    }
+
+    .membership-plan-price {
+        font-size: 32px;
+    }
+
+    .membership-plan-btn {
+        font-size: 15px;
+        padding: 12px;
+    }
+}
