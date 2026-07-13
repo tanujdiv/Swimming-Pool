@@ -44,7 +44,7 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/booking/{booking}/extend', [BookingManagementController::class, 'extend'])
         ->name('admin.booking.extend');
 
-        
+
 
     Route::get('/admin/notifications', [NotificationController::class, 'index'])
         ->name('admin.notifications');
@@ -98,9 +98,6 @@ Route::post('/logout', [AuthController::class, 'logout']);
 Route::middleware('auth')->group(function () {
 
     Route::get('/memberships', [BookingController::class, 'memberships'])->name('memberships');
-
-
-    Route::view('/renew-membership', 'frontend.renew-membership')->name('membership.renew.page');
 
     Route::get('/booking', [BookingController::class, 'index'])->name('booking');
 

@@ -75,7 +75,13 @@
                                 <tr>
                                     <td colspan="5" class="text-center py-4 empty-history-text">
                                         😔 No Membership History Found.
-                                    </td>
+
+                                        <br><br>
+
+                                        <a href="{{ route('memberships') }}" class="btn btn-primary">
+                                            Purchase / Renew Plan
+                                        </a>
+                                                </td>
                                 </tr>
                             @endforelse
                         </tbody>

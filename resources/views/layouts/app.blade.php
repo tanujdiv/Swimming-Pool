@@ -56,7 +56,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('membership.renew.page') }}">
+                        <a class="nav-link" href="{{ route('membership.history') }}">
                             <i class="bi bi-arrow-repeat me-1"></i>
                             Renew
                         </a>
