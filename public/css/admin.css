@@ -477,3 +477,279 @@ RESPONSIVE MEDIA QUERIES (INTEGRATED)
         font-size: 22px;
     }
 }
+
+
+/*==================================
+ADMIN BOOKING LIST PAGE
+==================================*/
+
+.admin-booking-list-wrapper {
+    padding: 20px 0;
+}
+
+.admin-booking-list-card {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 35px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+.admin-booking-list-header {
+    margin-bottom: 30px;
+}
+
+.admin-booking-list-title {
+    color: #ffffff !important;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.admin-booking-list-subtitle {
+    color: #e2eeff !important;
+    margin-top: 5px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* SHIFT SCROLLBAR TO THE TOP & CONFIGURE DRAG DRIVER CONTAINER */
+.admin-booking-scroll-top {
+    transform: rotateX(180deg);
+    /* Flip wrapper to throw scrollbar layout to the top */
+    overflow-x: auto;
+    cursor: grab;
+    user-select: none;
+    scrollbar-width: auto;
+    /* For Firefox */
+    scrollbar-color: #00c6ff rgba(255, 255, 255, 0.05);
+    /* For Firefox */
+}
+
+.admin-booking-scroll-top table {
+    transform: rotateX(180deg);
+    /* Counter-flip content inside so text remains normal */
+}
+
+.active-dragging {
+    cursor: grabbing !important;
+}
+
+/* CUSTOM HIGH-CONTRAST SCROLLBAR CONFIGURATION ON TOP */
+.admin-booking-scroll-top::-webkit-scrollbar {
+    height: 10px;
+}
+
+.admin-booking-scroll-top::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.admin-booking-scroll-top::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    border-radius: 50px;
+    border: 2px solid rgba(11, 21, 40, 0.8);
+}
+
+.admin-booking-scroll-top::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #7bed9f, #2ed573);
+}
+
+/* Glassmorphic Dark High Contrast Table Styling */
+.admin-booking-list-table {
+    margin-bottom: 0;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+.admin-booking-list-table thead th {
+    background: rgba(13, 27, 49, 0.8) !important;
+    color: #00c6ff !important;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 14px !important;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2) !important;
+    white-space: nowrap;
+}
+
+.admin-booking-list-table tbody td {
+    padding: 14px !important;
+    color: #ffffff !important;
+    background: transparent !important;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+/* Specific Highlight Column Selectors */
+.admin-booking-list-emp-text {
+    font-weight: 600 !important;
+    color: #ffffff !important;
+}
+
+.admin-booking-list-email-text {
+    color: #d8ecff !important;
+}
+
+.admin-booking-list-time-badge {
+    color: #00c6ff !important;
+    font-weight: 600 !important;
+}
+
+.admin-booking-list-count-badge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+/* Due Amount Warning Tag */
+.admin-booking-list-due-tag {
+    display: inline-block;
+    background: #ffb300;
+    color: #000000 !important;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    margin-top: 4px;
+    box-shadow: 0 2px 8px rgba(255, 179, 0, 0.3);
+}
+
+.admin-booking-list-price {
+    font-weight: 600;
+}
+
+/* Badges for Status Indicators */
+.admin-booking-list-status {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.status-pending {
+    background: rgba(255, 179, 0, 0.15);
+    border: 1px solid #ffb300;
+    color: #ffb300;
+}
+
+.status-checkin {
+    background: rgba(46, 213, 115, 0.15);
+    border: 1px solid #2ed573;
+    color: #2ed573;
+}
+
+.status-checkout {
+    background: rgba(255, 71, 87, 0.15);
+    border: 1px solid #ff4d4d;
+    color: #ff4d4d;
+}
+
+.status-default {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid #ffffff;
+    color: #ffffff;
+}
+
+/* Compact Forms & Dropdown Configuration inside Actions Column */
+.admin-booking-list-actions {
+    min-width: 160px;
+    text-align: center;
+}
+
+.admin-booking-list-btn {
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #ffffff;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.admin-booking-list-btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn-success-action {
+    background: linear-gradient(135deg, #2ed573, #20bf6b);
+}
+
+.btn-danger-action {
+    background: linear-gradient(135deg, #ff4d4d, #ff3838);
+}
+
+.btn-primary-action {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+}
+
+.admin-booking-list-select {
+    background-color: rgba(11, 21, 40, 0.9) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 13px;
+}
+
+.admin-booking-list-select:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 198, 255, 0.25);
+    border-color: #00c6ff !important;
+}
+
+.admin-booking-list-extend-box {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Custom Pagination Elements integration colors */
+.admin-booking-list-pagination .page-link {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    color: #ffffff !important;
+}
+
+.admin-booking-list-pagination .page-item.active .page-link {
+    background: linear-gradient(135deg, #00c6ff, #0072ff) !important;
+    border-color: #0072ff !important;
+}
+
+/*==========================
+Responsive Media Queries
+==========================*/
+@media(max-width: 992px) {
+    .admin-booking-list-card {
+        padding: 25px;
+    }
+
+    .admin-booking-list-title {
+        font-size: 28px;
+    }
+}
+
+@media(max-width: 576px) {
+    .admin-booking-list-wrapper {
+        padding: 15px 0;
+    }
+
+    .admin-booking-list-card {
+        padding: 15px;
+        border-radius: 14px;
+    }
+
+    .admin-booking-list-title {
+        font-size: 22px;
+    }
+
+    .admin-booking-list-subtitle {
+        font-size: 13px;
+    }
+}
