@@ -753,3 +753,213 @@ Responsive Media Queries
         font-size: 13px;
     }
 }
+
+
+/*==================================
+ADMIN MEMBERSHIP CRUD PAGE
+==================================*/
+
+.admin-membership-crud-wrapper {
+    padding: 20px 0;
+}
+
+.admin-membership-crud-main-title {
+    color: #ffffff !important;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.admin-membership-crud-subtitle {
+    color: #e2eeff !important;
+    margin-top: 5px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* Glassmorphism Card Style for Form Panel */
+.admin-membership-crud-card {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 30px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+.admin-membership-crud-card-title {
+    color: #ffffff !important;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.admin-membership-crud-label {
+    color: #ffffff !important;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+    font-size: 14px;
+}
+
+/* Custom Input Config */
+.admin-membership-crud-input {
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 12px !important;
+    padding: 12px !important;
+    background: rgba(11, 21, 40, 0.8) !important;
+    color: #ffffff !important;
+    font-weight: 500;
+}
+
+.admin-membership-crud-input::placeholder {
+    color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.admin-membership-crud-input:focus {
+    box-shadow: 0 0 0 0.25rem rgba(0, 198, 255, 0.25) !important;
+    border-color: #00c6ff !important;
+    background: rgba(11, 21, 40, 0.95) !important;
+}
+
+/* Dynamic Save Button */
+.admin-membership-crud-btn {
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.admin-membership-crud-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 198, 255, 0.3);
+}
+
+/* Right Display List Box Grid Panel */
+.admin-membership-crud-list-container {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 30px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Glassmorphism Stat Cards for Individual Plans */
+.admin-membership-crud-stat-card {
+    background: rgba(13, 27, 49, 0.65);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s ease;
+    border-left: 5px solid #00c6ff;
+}
+
+.admin-membership-crud-stat-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(0, 198, 255, 0.4);
+    box-shadow: 0 12px 30px rgba(0, 198, 255, 0.15);
+}
+
+.admin-membership-crud-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    background: rgba(0, 198, 255, 0.15);
+    color: #00c6ff;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.admin-membership-crud-plan-name {
+    color: #ffffff !important;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.admin-membership-crud-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 12px;
+}
+
+.admin-membership-crud-price {
+    color: #2ed573 !important;
+    /* Premium Crisp Neon Green */
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.admin-membership-crud-days {
+    color: #e2eeff !important;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.admin-membership-crud-empty {
+    color: #e2eeff !important;
+    font-weight: 500;
+    text-align: center;
+    padding: 30px 0;
+}
+
+.admin-membership-crud-alert {
+    background: rgba(46, 213, 115, 0.2) !important;
+    border: 1px solid #2ed573 !important;
+    color: #ffffff !important;
+    border-radius: 12px;
+    font-weight: 500;
+}
+
+/*==========================
+Responsive Media Queries
+==========================*/
+@media(max-width: 992px) {
+    .admin-membership-crud-main-title {
+        font-size: 28px;
+    }
+
+    .admin-membership-crud-card,
+    .admin-membership-crud-list-container {
+        padding: 22px;
+    }
+}
+
+@media(max-width: 576px) {
+    .admin-membership-crud-wrapper {
+        padding: 15px 0;
+    }
+
+    .admin-membership-crud-main-title {
+        font-size: 24px;
+    }
+
+    .admin-membership-crud-subtitle {
+        font-size: 13px;
+    }
+
+    .admin-membership-crud-card-title {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+
+    .admin-membership-crud-plan-name {
+        font-size: 18px;
+    }
+
+    .admin-membership-crud-price {
+        font-size: 18px;
+    }
+}
